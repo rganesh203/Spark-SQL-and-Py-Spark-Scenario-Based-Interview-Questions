@@ -1,0 +1,20 @@
+{
+    "employee": 
+	{
+      "name": "John",
+      "age": 30,
+      "height_in_ft": 5.11,
+      "married": true,
+      "has_kids": false,
+      "stock_options": null,
+      "phone": "+1 123-456-7890",
+      "date_of_birth":"2022-12-08",
+      "dob_timestamp":"2022-12-08T19:27:40.606-08:00",
+      "Address": 
+	  {
+        "street": "4132 Grant Street",
+        "city": "Rockville",
+        "State": "Minnesota"
+      }
+    }
+  }

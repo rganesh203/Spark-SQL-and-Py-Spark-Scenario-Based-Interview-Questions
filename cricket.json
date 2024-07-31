@@ -1,0 +1,297 @@
+{
+  "meta": {
+    "data_version": "1.1.0",
+    "created": "2023-10-26",
+    "revision": 1
+  },
+  "info": {
+    "balls_per_over": 6,
+    "city": "Lucknow",
+    "dates": [
+      "2023-10-12"
+    ],
+    "event": {
+      "name": "ICC Cricket World Cup",
+      "match_number": 10
+    },
+    "gender": "male",
+    "match_type": "ODI",
+    "match_type_number": 4667,
+    "officials": {
+      "match_referees": [
+        "J Srinath"
+      ],
+      "reserve_umpires": [
+        "CM Brown"
+      ],
+      "tv_umpires": [
+        "RA Kettleborough"
+      ],
+      "umpires": [
+        "JS Wilson",
+        "RK Illingworth"
+      ]
+    },
+    "outcome": {
+      "winner": "South Africa",
+      "by": {
+        "runs": 134
+      }
+    },
+    "overs": 50,
+    "player_of_match": [
+      "Q de Kock"
+    ],
+    "players": {
+      "South Africa": [
+        "Q de Kock",
+        "T Bavuma",
+        "HE van der Dussen",
+        "AK Markram",
+        "H Klaasen",
+        "DA Miller",
+        "M Jansen",
+        "K Rabada",
+        "KA Maharaj",
+        "L Ngidi",
+        "T Shamsi"
+      ],
+      "Australia": [
+        "MR Marsh",
+        "DA Warner",
+        "SPD Smith",
+        "M Labuschagne",
+        "JP Inglis",
+        "GJ Maxwell",
+        "MP Stoinis",
+        "MA Starc",
+        "PJ Cummins",
+        "A Zampa",
+        "JR Hazlewood"
+      ]
+    },
+    "registry": {
+      "people": {
+        "A Zampa": "14f96089",
+        "AK Markram": "6a26221c",
+        "CM Brown": "448f4f1c",
+        "DA Miller": "d67d5f00",
+        "DA Warner": "dcce6f09",
+        "GJ Maxwell": "b681e71e",
+        "H Klaasen": "235c2bb6",
+        "HE van der Dussen": "9948e262",
+        "J Srinath": "bad31fac",
+        "JP Inglis": "989889ff",
+        "JR Hazlewood": "03806cf8",
+        "JS Wilson": "d7f3b72f",
+        "K Rabada": "e62dd25d",
+        "KA Maharaj": "0b60eb09",
+        "L Ngidi": "f834dcfc",
+        "M Jansen": "81c36ee9",
+        "M Labuschagne": "fa433be6",
+        "MA Starc": "3fb19989",
+        "MP Stoinis": "d9273ee7",
+        "MR Marsh": "3d8feaf8",
+        "PJ Cummins": "ded9240e",
+        "Q de Kock": "372455c4",
+        "RA Kettleborough": "4017868f",
+        "RK Illingworth": "20672246",
+        "SA Abbott": "1a2676c5",
+        "SPD Smith": "30a45b23",
+        "T Bavuma": "9ffd1ac1",
+        "T Shamsi": "a03bba42"
+      }
+    },
+    "season": "2023/24",
+    "team_type": "international",
+    "teams": [
+      "South Africa",
+      "Australia"
+    ],
+    "toss": {
+      "decision": "field",
+      "winner": "Australia"
+    },
+    "venue": "Bharat Ratna Shri Atal Bihari Vajpayee Ekana Cricket Stadium, Lucknow"
+  },
+  "innings": [
+    {
+      "team": "South Africa",
+      "overs": [
+        {
+          "over": 0,
+          "deliveries": [
+            {
+              "batter": "Q de Kock",
+              "bowler": "MA Starc",
+              "non_striker": "T Bavuma",
+              "runs": {
+                "batter": 0,
+                "extras": 0,
+                "total": 0
+              }
+            },
+            {
+              "batter": "Q de Kock",
+              "bowler": "MA Starc",
+              "non_striker": "T Bavuma",
+              "runs": {
+                "batter": 1,
+                "extras": 0,
+                "total": 1
+              }
+            },
+            {
+              "batter": "T Bavuma",
+              "bowler": "MA Starc",
+              "non_striker": "Q de Kock",
+              "runs": {
+                "batter": 0,
+                "extras": 0,
+                "total": 0
+              }
+            },
+            {
+              "batter": "T Bavuma",
+              "bowler": "MA Starc",
+              "non_striker": "Q de Kock",
+              "runs": {
+                "batter": 1,
+                "extras": 0,
+                "total": 1
+              }
+            },
+            {
+              "batter": "Q de Kock",
+              "bowler": "MA Starc",
+              "non_striker": "T Bavuma",
+              "runs": {
+                "batter": 1,
+                "extras": 0,
+                "total": 1
+              }
+            },
+            {
+              "batter": "T Bavuma",
+              "bowler": "MA Starc",
+              "non_striker": "Q de Kock",
+              "runs": {
+                "batter": 1,
+                "extras": 0,
+                "total": 1
+              }
+            }
+          ]
+        }
+      ],
+      "powerplays": [
+        {
+          "from": 0.1,
+          "to": 9.6,
+          "type": "mandatory"
+        },
+        {
+          "from": 10.1,
+          "to": 39.6,
+          "type": "mandatory"
+        },
+        {
+          "from": 40.1,
+          "to": 49.6,
+          "type": "mandatory"
+        }
+      ]
+    },
+    {
+      "team": "Australia",
+      "overs": [
+        {
+          "over": 0,
+          "deliveries": [
+            {
+              "batter": "MR Marsh",
+              "bowler": "L Ngidi",
+              "non_striker": "DA Warner",
+              "runs": {
+                "batter": 0,
+                "extras": 0,
+                "total": 0
+              }
+            },
+            {
+              "batter": "MR Marsh",
+              "bowler": "L Ngidi",
+              "non_striker": "DA Warner",
+              "runs": {
+                "batter": 1,
+                "extras": 0,
+                "total": 1
+              }
+            },
+            {
+              "batter": "DA Warner",
+              "bowler": "L Ngidi",
+              "non_striker": "MR Marsh",
+              "runs": {
+                "batter": 2,
+                "extras": 0,
+                "total": 2
+              }
+            },
+            {
+              "batter": "DA Warner",
+              "bowler": "L Ngidi",
+              "non_striker": "MR Marsh",
+              "runs": {
+                "batter": 0,
+                "extras": 0,
+                "total": 0
+              }
+            },
+            {
+              "batter": "DA Warner",
+              "bowler": "L Ngidi",
+              "non_striker": "MR Marsh",
+              "runs": {
+                "batter": 0,
+                "extras": 0,
+                "total": 0
+              }
+            },
+            {
+              "batter": "DA Warner",
+              "bowler": "L Ngidi",
+              "non_striker": "MR Marsh",
+              "runs": {
+                "batter": 0,
+                "extras": 0,
+                "total": 0
+              }
+            }
+          ]
+        }
+      ],
+      "powerplays": [
+        {
+          "from": 0.1,
+          "to": 9.6,
+          "type": "mandatory"
+        },
+        {
+          "from": 10.1,
+          "to": 39.6,
+          "type": "mandatory"
+        },
+        {
+          "from": 40.1,
+          "to": 40.5,
+          "type": "mandatory"
+        }
+      ],
+      "target": {
+        "overs": 50,
+        "runs": 312
+      }
+    }
+  ]
+}

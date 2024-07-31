@@ -1,0 +1,32 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "position": "Software Engineer",
+      "department": "Engineering",
+      "phone": "+1234567890",
+      "address": {
+        "street": "123 Main St",
+        "city": "Anytown",
+        "state": "CA",
+        "zip": "12345",
+        "country": "USA"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "position": "Marketing Manager",
+      "department": "Marketing",
+      "phone": "+1987654321",
+      "address": {
+        "street": "456 Elm St",
+        "city": "Sometown",
+        "state": "NY",
+        "zip": "54321",
+        "country": "USA"
+      }
+    }
+  ]
+}
