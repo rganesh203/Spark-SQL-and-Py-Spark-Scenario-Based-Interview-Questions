@@ -1,0 +1,493 @@
+intput:
+Client	Date	Sales
+A	01-01-2023	50
+A	02-01-2023	60
+B	01-01-2023	70
+B	02-01-2023	80
+C	01-01-2023	90
+C	02-01-2023	100
+ 
+Client	Date	Cost
+A	01-01-2023	5
+A	02-01-2023	10
+B	01-01-2023	15
+B	02-01-2023	20
+C	01-01-2023	25
+C	02-01-2023	30
+ 
+output:
+Client	Date	Profit
+A	01-01-2023	45
+A	02-01-2023	50
+B	01-01-2023	55
+B	02-01-2023	60
+C	01-01-2023	65
+C	02-01-2023	70
+ 
+Company BarRaiser Role: Data Engineer                                                                                                                                
+1. employees, dept two tables write a query below that retrives the employees who earn more than 
+    avg salary of dept their salary.                                                                                                                                                                           
+2. 'racecar' input string find polindrome or not.                                                                                                                   
+3. How to optimize Spark notebook.
+4. How to optimize spark job.
+5. How to validate data in pipeline.
+6. How to secure data in notebook.
+7. ETL/ELT.                
+8. How to handle Null values and Missing Values.
+
+
+production_id	farm_id	production_date	production_quantity
+1	201	2023-03-01	100
+2	201	2023-03-10	150
+3	201	2023-03-20	120
+4	201	2023-03-30	130
+5	202	2023-04-05	200
+6	202	2023-04-15	220
+7	202	2023-04-25	210
+8	202	2023-05-05	230
+
+Given the WheatProduction table, write a SQL query to retrieve the
+ production ID, farm ID, production date, production quantity, and the average production quantity 
+ over the current production and the three preceding productions for the same farm. 
+ The result should be ordered by farm ID and production date.
+ 
+Table:
+Schema:
+production_id (integer): The unique identifier for the production record.
+farm_id (integer): The unique identifier for the farm.
+production_date (date): The date when the production occurred.
+production_quantity (integer): The quantity of wheat produced.
+
+
+select avg(production_quantity) over (order by farm_id) as avg_prdu_quantity
+from Production_table order by farm_ID and production_date
+
+
+Write an ADF pipeline expression to pass parameters dynamically to pipelines.
+
+@pipeline().parameters.inputFilename
+
+@concat('input', formatDatetime(pipeline(). parameters.executiondate,'yyyy/mm/dd','/file.csv)
+
+
+
+Q:
+a = [30, -60, -90, -120]
+Write a Python script to reverse this list using indexing
+ 
+ 
+ a[::-1]
+ 
+ 
+ =[a for i in
+ 
+ 
+Q:
+i = [11, 22, 33, 44, 55]
+	0	1    2
+print(i[2:2])
+
+[]
+
+ 
+Spark context vs spark session
+
+difference between RDD, Dataframe and DataSet in spark
+
+what is On Heap memory
+
+what is Off Heap memory
+
+what is Garbage Collector
+
+Explain Spark internal architecture
+
+Difference between Spark cluster mode vs Client mode
+
+how spark do memory management
+
+what is driver out of memory exception and how to fix it
+
+what is executor out of memory exception and how to fix it
+
+what are transformation and action in spark
+
+difference between narrow and wide transformation
+
+what is fault tolerence in spark
+
+what is lazy evaluation in spark
+
+can one spark application have multiple spark sessions
+
+what is spark directed acyclic graph (DAG)
+
+what is spark application , job, stages and tasks
+
+how to calculate number of cpu cores required to process data in spark
+
+how to calculate number of executors required to process data in spark
+
+how much each executor memory is required to process data in spark
+
+how to calculate the total memory required to process data in spark
+
+how to setup spark configuration for cluster
+
+managed tables vs external tables
+
+temporary view vs global temporary view
+
+what is materialized view
+
+types of slowy changing dimensions
+
+how to create a dataframe by reading different file format(csv,json,parquet etc)
+
+how to create a dataframe out of a hive table
+
+how to write dataframe
+
+explain the concept of lazy evaluation in spark and its significance
+
+what is predective pushdown in spark
+
+what is sortmergejoin
+
+how can you perform a broadcast join
+
+what is partitioning and bucketing
+
+cache vs presist
+
+storage level of presists
+
+repartition vs coalesce
+
+how to create a new column in table using pyspark
+
+how to remove duplicates in spark
+
+how to fill null values in spark
+
+how can you select specific columns from spark dataframe
+
+how can you rename a column in a spark dataframe
+
+how do you perform a groupby operation in spark
+
+how can you join two spark dataframe
+
+explain the use of StructType and StructField classes in spark with example
+
+what is incremental load? how to implement?
+
+can you discuss the role of structed streaming in spark
+
+what is databricks unit catalog?
+
+what is the difference between with and without unity catalog?
+
+what is the difference with and without catalog
+
+what is RLS and CLS in databricks
+
+what is role based access control
+
+why unity catalog is better than hive metastore
+
+what is different roles in unity catalog
+
+what is medallion architecture
+
+what is delta lake
+
+what is delta table
+
+what are features of delta tables
+
+what is lakehouse architecture
+
+data warehouse vs data lake vs data lakehouse
+
+what is optimize in databricks and what does it do?
+
+explain about z-order function
+
+what is vaccum in databricks
+
+what is autoloader in databricks
+
+what is delta live tables in databricks
+
+types of databricks cluster and their uses?
+
+
+#UST Global Solutions
+
+ 
+ we have multiple dataframes how use salting technique
+ how to use upsert upadate and insert dont have primary key in tables
+ 
+ # Initialize Spark session
+spark = SparkSession.builder.appName("SalesAnalysis").getOrCreate()
+ 
+# Sample data
+data = [
+    ("2023-01-01", "A", "Product1", 100, 10),
+    ("2023-01-02", "B", "Product2", 150, 5),
+    ("2023-01-03", "A", "Product3", 200, 8),
+    ("2023-01-04", "C", "Product1", 120, 4),
+    ("2023-01-05", "B", "Product3", 180, 6),
+    ("2023-01-06", "A", "Product2", 130, 7),
+    ("2023-01-07", "C", "Product3", 160, 5),
+    ("2023-01-08", "B", "Product1", 140, 3),
+    ("2023-01-09", "A", "Product2", 110, 9),
+    ("2023-01-10", "C", "Product1", 190, 2)
+]
+ 
+# Create DataFrame
+df = spark.createDataFrame(data, ["date", "store", "product", "sales", "quantity"])
+ 
+# Question: Analyze the sales data and provide insights
+# 1. Calculate total sales and quantity for each store
+# 2. Rank products by total sales within each store
+
+
+
+store_totals=df.groupby("store").agg(sum("sales"),sum("quantity"))
+
+prodct_sales=df.groupby("store","product").agg(sum("sales").alias("totak_product_sales")
+
+rank_produsct=prodct_sales.withColumn("rank").rank().over(window.partionBy("store").ordedBy(col(totak_product_salesal").desc())
+
+
+store_totals.dispaly()
+ 
+ You are tasked with preprocessing a large dataset stored in Snowflake 
+to prepare it for an ML model. The dataset contains columns: user_id, 
+purchase_amount, purchase_date, and country. Using PySpark and the Snowflake 
+connector, write a script to: Extract data from Snowflake. 
+Filter records where purchase_amount > 100 and country = 'USA'. 
+Create a new feature purchase_week based on purchase_date. 
+Save the processed data back to S3 in Parquet format.
+
+
+ETL pipeline
+
+how to optimize 5 tables Join
+
+how process snowpipe in snowflake in ML model
+
+SCD3 and SCD4
+
+how to process 10 years years of data in datawarehouse
+
+How to partisition data in sql
+
+
+#Building Reliable ETL Pipelines with Azure ADF and Databricks
+
+ChatGPT said:
+ChatGPT
+Building reliable ETL pipelines with Azure Data Factory (ADF) and Databricks is a common approach for managing big data workflows in the Azure ecosystem. Here's a comprehensive guide to help you design and implement these pipelines effectively.
+
+Key Components
+Azure Data Factory (ADF):
+
+Orchestration service for data workflows.
+Can connect to various data sources, including Azure Blob Storage, Azure SQL Database, Data Lake, and third-party APIs.
+Activities: Lookup, Copy Data, Mapping Data Flows, Databricks Notebooks/Jobs integration.
+Azure Databricks:
+
+Unified analytics platform for big data and AI workloads.
+Handles data transformation at scale using PySpark, Scala, or SQL.
+Ideal for processing and transforming semi-structured and unstructured data.
+Data Lake (or Blob Storage):
+
+Acts as a source or sink for raw and processed data.
+Monitoring and Logging:
+
+Use ADF monitoring features and Databricks cluster logs to ensure reliability.
+Steps to Build Reliable ETL Pipelines
+1. Plan and Design the ETL Workflow
+Source Systems: Identify structured, semi-structured, and unstructured sources.
+Transformations: Define business logic (e.g., cleansing, filtering, joining, aggregating).
+Targets: Specify where the transformed data will be stored (e.g., Data Lake, SQL DB, Cosmos DB).
+Partitioning: Ensure data is partitioned for scalability and performance.
+Incremental Processing: Design pipelines to handle deltas (new/changed data).
+2. Use ADF for Orchestration
+Pipeline Structure:
+Use Lookup Activity to fetch metadata or trigger conditions.
+Use Copy Data Activity for bulk data transfers.
+Integrate Databricks Notebooks/Jobs for complex transformations.
+Triggers:
+Time-based triggers (e.g., schedule daily/weekly ETLs).
+Event-based triggers (e.g., blob creation triggers for incremental loads).
+Fault Tolerance:
+Use retries and failure alerts in pipeline activities.
+Break workflows into smaller, independent units to make debugging easier.
+3. Use Databricks for Transformations
+Write transformation logic using PySpark for flexibility and scalability.
+Use Delta Lake for ACID transactions and to enable upserts, deletes, and schema enforcement.
+Optimize Databricks workloads:
+Enable auto-scaling for clusters.
+Use caching for iterative processing.
+Leverage broadcast joins for small datasets.
+Incremental data processing using watermarking and merge operations in Delta Lake.
+4. Implement Incremental Load Mechanism
+Tracking Changes:
+Use metadata files or watermark columns to track processed data.
+Example: Use _lastModified timestamp from Azure Blob Storage.
+Merge Operations:
+Use Delta Lake's MERGE for handling updates and inserts efficiently.
+ADF Activities:
+Filter and process only new/changed data using dynamic queries or expressions.
+5. Logging and Monitoring
+ADF:
+Enable pipeline activity logs and alerts for failed runs.
+Use the ADF monitoring dashboard for pipeline insights.
+Databricks:
+Save logs and metrics to Azure Monitor or Blob Storage.
+Use Databricks sparkEventLog and cluster metrics.
+Centralized Logging:
+Combine logs from ADF and Databricks for unified monitoring.
+6. Error Handling and Notifications
+Add try-catch blocks in Databricks notebooks for handling exceptions.
+Use the ADF If Condition activity to branch pipelines based on success or failure.
+Send notifications using the Web Activity or Logic Apps for pipeline failures.
+7. Data Validation and Quality Checks
+Before Processing:
+Validate schema compatibility, missing values, and duplicate records in the source data.
+After Processing:
+Validate the row counts, data integrity, and business logic (e.g., sum of sales).
+Use Databricks' Great Expectations library for automated data quality checks.
+Example Architecture
+Source: Data is ingested into Azure Data Lake Storage Gen2 from multiple systems.
+ADF Pipeline:
+Lookup metadata to identify new files in Data Lake.
+Use Copy Data Activity to stage raw data in a landing zone.
+Trigger Databricks Notebooks for transformation.
+Databricks Notebook:
+Read raw data from landing zone.
+Perform cleansing, joining, and aggregations.
+Write processed data back to Delta Lake (gold layer).
+Target: Use the processed data for reporting (e.g., Power BI or Synapse).
+Best Practices
+Scalability: Partition large datasets in Databricks; use ADF parallel copy for large data transfers.
+Cost Optimization:
+Use spot instances in Databricks where feasible.
+Monitor pipeline and cluster usage.
+Versioning: Implement source control for Databricks notebooks and ADF pipelines.
+Security:
+Use Managed Identity for authentication between ADF and Databricks.
+Encrypt data at rest (in Data Lake) and in transit.
+Would you like more detailed examples of specific transformations or pipeline configurations?
+
+Explain Indexing, Sharding, Partitioning & Clustering with examples
+
+ChatGPT said:
+ChatGPT
+Indexing, Sharding, Partitioning, and Clustering are database optimization techniques used to improve query performance, scalability, and data organization. Here's an explanation of each, along with examples:
+1. Indexing
+Definition: Indexing is a technique that creates a data structure (like a B-tree or hash table) to speed up data retrieval operations. Instead of scanning the entire table, the index helps quickly locate the data.
+Use Case: Improves the performance of SELECT queries, especially for large datasets.
+Example: Suppose you have a table employees:
+
+scss
+Copy code
+employees (id INT, name VARCHAR(50), department VARCHAR(50), salary DECIMAL)
+Without an index, searching for employees in the IT department (WHERE department = 'IT') requires scanning the entire table.
+
+Solution: Create an index on the department column:
+
+sql
+Copy code
+CREATE INDEX idx_department ON employees(department);
+Now, the query:
+
+sql
+Copy code
+SELECT * FROM employees WHERE department = 'IT';
+will use the index for faster lookups.
+
+2. Sharding
+Definition: Sharding is a horizontal scaling technique where data is divided into smaller, independent chunks (shards) and distributed across multiple database servers. Each shard contains a subset of the data.
+Use Case: Used to improve scalability and performance in distributed systems.
+Example: Imagine you have a database of customers distributed globally. Instead of storing all customers in one large table, you shard them by region:
+
+Shard 1: Customers in North America
+Shard 2: Customers in Europe
+Shard 3: Customers in Asia
+Queries for customers from Asia (WHERE region = 'Asia') will only query the Asia shard, improving performance.
+
+3. Partitioning
+Definition: Partitioning divides a table into smaller, manageable pieces (partitions) within the same database. Each partition stores data based on a specified criterion, such as range, list, or hash.
+Use Case: Optimizes query performance by limiting the data scanned for a query.
+Types of Partitioning:
+
+Range Partitioning: Partition data by a range of values.
+List Partitioning: Partition by specific values.
+Hash Partitioning: Partition by a hash function.
+Example: A sales table partitioned by year:
+
+sql
+Copy code
+CREATE TABLE sales (
+    id INT,
+    order_date DATE,
+    amount DECIMAL
+) PARTITION BY RANGE (YEAR(order_date)) (
+    PARTITION p_2022 VALUES LESS THAN (2023),
+    PARTITION p_2023 VALUES LESS THAN (2024)
+);
+A query for 2023 data:
+
+sql
+Copy code
+SELECT * FROM sales WHERE order_date BETWEEN '2023-01-01' AND '2023-12-31';
+will only scan p_2023, skipping irrelevant partitions.
+
+4. Clustering
+Definition: Clustering involves storing data in such a way that rows with similar values (based on a clustering key) are physically stored together. This helps with efficient range queries.
+Use Case: Useful for optimizing analytical queries that involve range scans or filtering.
+Example: Consider a logs table for storing application logs:
+
+sql
+Copy code
+logs (id INT, timestamp DATETIME, log_message TEXT)
+If you frequently query logs by a time range (WHERE timestamp BETWEEN '2024-01-01' AND '2024-01-31'), clustering the data by timestamp ensures that rows with similar timestamps are stored together on disk, minimizing disk reads.
+
+Clustering Example (in Databricks):
+
+sql
+Copy code
+CREATE TABLE logs
+USING DELTA
+CLUSTERED BY (timestamp)
+INTO 10 BUCKETS;
+Comparison Table
+Technique	Definition	Use Case	Example
+Indexing	Data structure to speed up lookups.	Fast retrieval of data.	Index on department column for quick filtering.
+Sharding	Horizontally splits data across multiple servers.	Scalable distributed databases.	Customers split by region (Asia, Europe, etc.).
+Partitioning	Divides a table into smaller, logical subsets based on a criterion.	Speeds up queries by scanning only relevant partitions.	Sales table partitioned by year.
+Clustering	Physically groups related rows together for faster access.	Optimizes range queries and analytical workloads.	Logs table clustered by timestamp.
+Key Differences:
+Indexing focuses on improving lookup speed for individual queries.
+Sharding is for scaling across multiple servers, while partitioning is for organizing data within a single server.
+Clustering improves how data is stored physically to optimize certain queries.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

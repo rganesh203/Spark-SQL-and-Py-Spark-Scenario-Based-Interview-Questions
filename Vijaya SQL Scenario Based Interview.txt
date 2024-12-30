@@ -1,0 +1,743 @@
+2 nd max salary
+---------------------------------
+select sal from(select sal,dense_rank() over(order by sal desc) as dense_rank from emp)where dense_rank=2
+
+unnest
+-----------------
+unnest is used to expand array elements in row
+select unnest(array[1,2,3,4,5])
+
+output
+------------
+1
+2
+3
+4
+5
+
+
+delete duplicate records
+-------------------------------------
+with cte as (
+select *, ctid,row_number() over(partition by id order by ctid) from a
+) delete from a using cte c where c.ctid=a.ctid and row_number>1;
+
+
+indexes
+---------------------
+indexes are powerful tools that are used for speed of querying
+increase the database performance
+create index indexname on tablename using gin(column1);
+
+
+team size
+---------------------
+10 members
+3 db developers
+3 frontend developers
+1 business analyst
+1 tl
+2 testers
+
+
+platform
+------------------
+windows
+
+we create 32000 plus db's in a one postgresql server
+
+
+database
+------------------------
+postgresql
+
+application usage 
+------------------------------
+data accuracy,patient interact,time save(hospital)
+
+opd module
+---------------------
+All the details remain in this form until a patient comes to the hospital, 
+undergoes treatment and exits.
+
+
+application build
+---------------------------
+the patient interacts with the hospital through the website
+Patient can make appointment by paying in advance,
+Medicine can also be ordered, treatment can be obtained from home based on doctors suggestion
+
+if in case hospital is at hyd or banglore at that the patient appointment is gud for usage
+
+
+
+how many functions are wrriten per day
+-----------------------------------------------
+3 or 4 big
+small 20 functions
+
+one function
+---------------------------------------------------------
+patient,gender
+patient details--function
+
+create table patient(p_id int primary key,p_name varchar,g_id int)
+ 
+create table gender(g_id int,g_type varchar)
+
+create or replace function patient_details(p_id int)
+returns table(p_name varchar,g_type varchar)
+language plpgsql 
+as $$
+declare
+begin
+return query
+select p.id,p.name,g.type from patient p full outer join gender g on p.g_id=g.g_id;
+end;
+$$;
+
+select patient_details(1);
+
+one procedure
+
+one trigger
+------------------------------------------------
+
+CREATE TABLE doctor (
+   id INT GENERATED ALWAYS AS IDENTITY,
+   first_name VARCHAR(40) NOT NULL,
+   last_name VARCHAR(40) NOT NULL,
+   PRIMARY KEY(id)
+);
+
+CREATE TABLE doctor_audits (
+   id INT GENERATED ALWAYS AS IDENTITY,
+    doctor_id INT NOT NULL,
+   last_name VARCHAR(40) NOT NULL,
+    changed_on TIMESTAMP NOT NULL
+);
+
+CREATE OR REPLACE function doctor_changes()
+  RETURNS TRIGGER 
+  LANGUAGE PLPGSQL
+  AS
+$$
+BEGIN
+	IF NEW.last_name <> OLD.last_name THEN
+		 INSERT INTO doctor_audits(doctor_id,last_name,changed_on)
+		 VALUES(OLD.id,OLD.last_name,now());
+	END IF;
+
+	RETURN NEW;
+END;
+$$
+
+CREATE TRIGGER trigger_changes
+  BEFORE UPDATE
+  ON doctor
+  FOR EACH ROW
+  EXECUTE function doctor_changes();
+  
+  
+  INSERT INTO  doctor(first_name, last_name)
+VALUES ('John', 'Doe');
+
+INSERT INTO doctor (first_name, last_name)
+VALUES ('Lily', 'Bush');
+
+select * from doctor;
+
+UPDATE doctor
+SET last_name = 'bommisetty'
+WHERE ID = 2;
+
+
+
+
+select * from doctor;
+
+select * from  doctor_audits;
+
+
+
+drop a trigger
+-------------------------------
+drop trigger trigger_name on table_name
+
+
+
+one view
+
+
+
+procedure with exception handling
+---------------------------------------
+procedure or 
+exception--blood table ,no insert data,  procedure(blood_details) v_id=100 
+
+create table blood(p_id int,p_type varchar,p_cost decimal(18,2));
+
+create or replace procedure blood_details(p_id int)
+language plpgsql
+as
+$$
+declare
+rec record;
+v_id int=1000;
+begin
+select * into rec from blood where v_id=p_id;
+exception 
+when no_data_found then
+raise notice'%',v_id; 
+end;
+$$;
+
+call blood_details(1)
+
+
+
+exception 
+----------------------
+exception is used to handle the erros in block of code
+with help of exception program executed
+
+
+
+language plpgsql as $$
+$$--it is called dollar quoting 
+it is used to represent a block of code
+
+return statements
+--------------------
+
+in  -- return 
+out  --  return record 
+inout --  return record
+
+
+calling 
+-------------
+in -- value ivali
+out --no need value
+inout -- value ivali
+
+postgresql architecture
+-------------------------------
+
+AUTOVACUUM workers
+---------------------------------
+auto vaccum workers are useful for  storage space 
+and optimizes the performance of  tables. 
+When a row is deleted or updated in a table, 
+the old version of the row becomes a dead row that takes up space in the table until 
+it is reclaimed by a vacuum operation.  
+
+
+background workers 
+------------------------------------------
+background workers are responsible for handling tasks, 
+background jobs, and other critical operations.
+
+
+Auxiliary process. 
+----------------------
+Auxiliary processes are secondary or supplementary processes
+that perform various tasks to support the core functionality of the Postgres system.
+
+
+postmaster
+----------------
+postmaster is the collection of processes forked from the main process called Postmaster.
+
+backend process
+-------------------------
+The backend process parses the query, creates an execution plan, executes the plan, 
+and returns the retrieved rows to the client.. 
+
+wal senders
+-------------
+sending the WAL registries to the standby server(s) 
+support the replication process.
+
+postmaster
+------------------------
+PostgreSQL backend is a collection of processes forked from the main process called Postmaster 
+
+
+server provide services to different clients
+
+
+32000 plus db s connected to one server
+and tables size is upto 32 TB
+
+MVCC
+----------------------
+it is multi version concurency control
+it is an optimization technique
+MVCC creates duplicate copies of records so that data can be safely read and updated at the same time
+
+mvcc allow multiple transactions to access the same data
+ simultaneously without conflicting with each other.
+
+ It is used by creating a separate version of a row for each transaction that modifies it.
+
+
+
+When you issue a query like SELECT * FROM table; 
+to a database, several steps occur in the background to execute this query:
+-----------------------------------------------------------------------------------
+Parsing:
+ The database first parses the query to understand its structure and verify that it is syntactically correct. 
+
+Query Optimization:
+ Once parsed, the database optimizer determines the most efficient way to execute the query.
+ This involves considering various execution plans (e.g., which indexes to use, in what order to join tables) 
+to minimize the time and resources needed to fetch the data.
+
+Execution: After optimization, the database executes the query. 
+This step involves several sub-steps:
+
+Authorization: The database checks if the user has the necessary permissions to execute the query 
+and access the requested data.
+
+Query Execution Plan: 
+ If the query involves multiple tables, the database may need to fetch data from disk (if not in memory) 
+and perform operations such as joins, filtering, sorting, etc.
+
+Data Retrieval: The actual data is retrieved based on the query results.
+ In a SELECT * FROM table; query, all columns (*) from the specified table are fetched.
+
+Result Compilation: The retrieved data is then compiled into a result set. 
+This result set is usually structured in memory and 
+may be processed further depending on the client application's requirements.
+
+Transmission: Finally, the result set is sent back to the client application that issued the query. 
+This can involve serializing the data into a format that the client can understand (e.g., JSON, CSV, etc.) and transmitting it over the network.
+
+
+
+duplicate salaries with name
+----------------------------------------------------------------
+
+select esal from employee group by esal having count(*)>1
+
+
+create temp table table1(esal decimal(18,2))
+
+insert into table1
+select esal from employee group by esal having count(*)>1
+
+select e.empname,e.esal from employee e 
+inner join table1 t1 on e.esal=t1.esal;
+
+
+write operation
+---------------------
+dml
+
+read operation
+-------------------
+select
+
+instance ----installation
+indices----indexes
+
+mvcc
+------------------
+example
+
+one table,2 insert statements,select * from table is the 1 st transaction and update is the second transaction
+1 transaction shows the 2 records then 2 nd transaction not reflected into table,
+after commited only we show the updated record also
+
+
+capgemini
+-----------------
+i have one column with text datatype, then how to search a one string in that table
+
+select * from table where column1 like'l%'
+
+
+how to find out how many indexes or which index created on one table
+----------------------------------------------------------------------
+select * from pg_indexes where tablename='table1'
+
+
+we will create multiple indexes on different columns from one table
+
+
+query to monitor active connections and queries
+-----------------------------------------------------------------
+select * from pg_stat_database;   active dbs
+select * from pg_stat_user_tables;   active tables
+select * from pg_stat_activity;  
+Track slow queries ----select pg_stat_statements
+
+truncate delete difference
+-----------------------------------------
+truncate --delete all rows
+delete -- delete rows on specific condition
+
+TRUNCATE cannot be rolled back 
+but delete can
+
+truncate scenario
+------------------------------
+When you need to  remove all rows from a table 
+without concern for transactional integrity, triggers, or foreign key constraints.
+
+
+index background process
+-----------------------------------
+data structures--index def, types
+index creation
+index usage--work
+maintanance--update row,then changed the index id and then index value
+index scan--bitmap,index scan
+monitoring 
+
+
+how to change the materialized view
+--------------------------------------
+refresh materialized view materialized_view_name;
+
+
+pg_user
+---------------------------
+The view pg_user provides access to information about database users.
+
+a user is role with the ability to login with password
+
+
+dynamic sql
+----------------------------
+Dynamic SQL is used to execute SQL statements that are generated at run-time.
+
+
+-- Example: Search dname dynamically
+SELECT *
+FROM employee
+WHERE 1=1
+  AND dname LIKE 'a%'
+
+
+
+deloitee
+------------------------
+schema : emp
+table : MasterEmpDetails
+Columns : Col1, Col2, Col3
+Select * from MasterEmpDetails
+
+how to analyze
+
+ 2nd example
+--------------------------------------
+Table 1 : col1, col2, col3
+Table 2 : col4, col5, col3
+
+ 
+1 2 3   3 4 5   
+Resultset : Col1, col4, col3
+
+
+create table table1(id int,name varchar,gender varchar)
+create table table1(id int,gender varchar,)
+
+
+select t1.col1,t1.col3,t2.col4 from table1 as t1 inner join table2 t2 on t1.col3=t2.col3
+
+
+
+merge
+-------------------
+
+
+upsert
+----------------------
+i want update value in existed table and insert the row when it is new record
+
+
+create table upsert_table (id int primary key,name varchar,qualification varchar)
+
+insert into upsert_table values(1,'vijaya','btech')
+--inserted row on id 1 
+select * from upsert_table
+--display the 1 row like 1 vijaya btech
+
+
+insert into upsert_table values(1,'vijaya','btech')
+on conflict(id) do update
+set name='sai',
+qualification='iti'
+
+output
+-----------------
+1 sai iti
+
+
+ProductDescription	SalesInCrores
+ProductA	10
+ProductB	20
+ProductC	30
+ProductA	40
+ProductB	50
+ProductC	60
+
+ a 50 b 70 c 90
+
+
+with help of windows function find the 2 nd sales
+
+WITH SalesSummary AS (
+    SELECT ProductDescription, SUM(SalesInCrores) AS TotalSales
+    FROM SalesData
+    GROUP BY ProductDescription
+)
+SELECT ProductDescription, TotalSales
+FROM (
+    SELECT ProductDescription, TotalSales,
+           ROW_NUMBER() OVER (ORDER BY TotalSales DESC) AS RowNum
+    FROM SalesSummary
+) AS RankedSales
+WHERE RowNum = 2; 
+
+
+output---70 
+
+
+------------------------------or ----------------------------------------
+
+create temp table products(product varchar,sales int)
+insert into products values('a',30)
+select * from products
+
+select product,sum(sales) as total from products group by product
+
+60 ouptut
+
+with result as (
+select product,sum(sales) as total from products group by product
+)select product,total from(select product,total,row_number()over(order by total desc) as r_no from result) 
+where r_no=2
+
+
+example
+---------------------------
+SELECT * FROM runners WHERE id NOT IN (SELECT r_id FROM racers);
+                                           null 1 2 3 
+what is output for this query
+
+null
+
+create table runners(id int , name varchar)
+
+select * from runners;
+select * from racers;
+
+
+SELECT * FROM runners WHERE id NOT IN (SELECT r_id FROM racers);
+1 2 4 -- three records in table1       1 2  null --3 records in table2
+create table racers(id int , event varchar,r_id int)
+
+subquery has null record then use the not in we does not get output
+
+ats company
+---------------------------
+
+concurency---BEGIN TRANSACTION ISOLATION LEVEL SERIALIZABLE; and with help of locks we can handle concurency
+locks
+dead locks
+mvcc
+msql server to postgresql 
+conflicts 
+indexes
+putty commands
+vaccum
+
+username password  email phone
+
+putty
+---------------------------------
+SSH Connection: Use PuTTY to establish an SSH(secure shell) connection to the server where PostgreSQL is installed.
+ Enter the server's IP address or hostname in PuTTY, specify the SSH port (usually 22), 
+and click "Open" to establish the connection.
+
+Login: Enter your credentials (username and password) to log in to the server via SSH.
+after that connect to postgresql db s with help of psql(cli command line interface)
+
+psql -u username -d databasename 
+
+\d -- databases
+\dt-- tables
+\c--connect
+\dp-permissions
+
+SSH uses port 22
+
+
+locks
+----------------
+locks are mechanisms used to control access on the data to prevent conflicts occurs between transactions
+
+3 types
+row_level locks-locks are applied on rows
+
+select * from table where id=1 for update
+update statement
+commit
+
+table level locks---locks are appplied on tables
+
+lock table table1 in access exclusive mode
+
+advisory locks--used for application locks, 
+but not tied in postgresql but used for cordination between diff parts of applications
+
+select pg_advisory_lock(1234);
+select pg_advisory_unlock(1234);
+
+
+
+deadlocks
+------------------------------
+
+A deadlock occurs when two or more transactions are waiting for each 
+other to release locks on resources, 
+
+
+transaction a (me)
+---------------------------
+one update on patient table one update on doctor table
+
+transaction b
+----------------------------
+one update on patient table one update on gender table
+
+
+both are waiting to execute each other but want permission from each other
+
+at that time deadlock occur, 
+deadlocks automatically rollback the one of transaction involved in deadlock
+
+implicit and explicit converstion
+--------------------------------------------
+implicit convertion means we does not need to give datatype 
+compiler automatically converts
+
+
+select 1+1.23
+
+output like float value 2.23
+
+
+explicit means we should give partiular datatype
+select cast(100 as varchar);
+
+
+extensions
+-----------------------------
+extensions are add-on modules that enhance the functionality of the database.
+
+They provide additional features, data types, functions, and operators that are not present in the core system.
+
+Does the screen appear?
+
+can you hear my voice??
+
+
+partition and types
+-----------------------------------
+partition is defined as spliting large table data into small tables data
+
+
+range parttion,hash partition,list partition
+
+range partition
+-------------------------------
+range partition is created by range of columns provided by a partition key.
+
+hash partition
+--------------------------
+A hash partition is created by using modulus and remainder for each partition.
+
+list partititon
+---------------------------------
+A list partition is created with predefined values to hold in a partitioned table.
+
+
+create table patient(id int,name varchar,status varchar,admission date)partition by range(date)
+create table patient1 partition of patient values from () to();
+
+
+create table patient(id int,name varchar,status varchar,admission date)partition by hash(id);
+
+create table patient2 partition of patient for values with(modulus 1,remainder 2);
+
+
+create table patient(id int,name varchar,status varchar,admission date)partition by list(date)
+
+create table patient2 partition of patient for values in ('active');
+
+
+
+multilevel partitioning
+-------------------------------
+range-hash,range-range,range-list,hash-range,hash-hash,hash-list,list-list,list-range,list-hash
+
+create table patient(id int,status varchar,admission date)partition by range(admission)
+
+create table  patient1 partition of patient values from() to () parittion by hash(id)
+
+like that....................
+
+
+wal full form--write ahead log
+------------------------------------------
+WAL saves the entire data page content in the logs
+for the data consistency  after-crash recovery
+
+vaccum vaccumall difference
+----------------------------------
+vaccum       ----no locks the table 
+vaccumall--locks the table
+
+functions procedure difference
+how to backup data--we can backup data with help of pgadmin tool or command prompt
+return record datatype--we will return data as a record
+analyze--
+indexes
+partitioning tables
+
+
+normalization
+---------------------
+Normalization is a database design process used to organize data to reduce redundancy 
+and improve data integrity. In PostgreSQL, normalization involves structuring your tables and
+their relationships in a way that eliminates unnecessary duplication and ensures data consistency.
+
+
+
+----performance tuning or optimization same but techniques are different
+
+optimization techniques--indexes,explain
+performance tuning--cte,in exists,subqueries-----system resources,auto vaccum 
+
+
+implement triggers
+-----------------------------
+Triggers in PostgreSQL are special functions 
+that automatically execute or fire when certain events occur on a table
+
+
+user defined tables--we create tables
+pre defined tables--pg_class,pg_views,pg_tables,pg_settings,pg_roles
+
+data consistency and integrity
+--------------------------------------------
+Data consistency is the quality of data that is accurate, 
+and uniform across different systems, databases, and applications.
+
+
+Data integrity refers to the accuracy, consistency, and reliability of data throughout its lifecycle.
+
